@@ -38,12 +38,12 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         }
     }
 
-    override fun onSensorChanged(p0: SensorEvent?) {
-        if (p0?.sensor?.type == Sensor.TYPE_LIGHT) {
-            lightLevel = p0.values[0]
+    override fun onSensorChanged(event: SensorEvent?) {
+        if (event?.sensor?.type == Sensor.TYPE_LIGHT) {
+            lightLevel = event.values[0]
             if (lightLevel < 10.0f && !torchOn) {
                 toggleTorch()
-            } else {
+            } else if (lightLevel >= 10.0f && torchOn) {
                 toggleTorch()
             }
         }
